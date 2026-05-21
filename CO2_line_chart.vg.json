@@ -1,0 +1,67 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "description": "Greenhouse gas emissions by sector over time.",
+  "data": {
+    "url": "greenhouse_emissions_data.csv",
+    "format": {
+      "parse": {
+        "Quarter": "date:'%B %Y'"
+      }
+    }
+  },
+  "transform": [
+    {
+      "fold": [
+        "Agriculture",
+        "Electricity",
+        "Fugitive Emissions",
+        "Industrial Processes",
+        "Stationary Energy (excluding electricity)",
+        "Transport",
+        "Waste"
+      ],
+      "as": ["Sector", "Emissions"]
+    }
+  ],
+  "mark": {
+    "type": "line",
+    "point": true
+  },
+  "encoding": {
+    "x": {
+      "timeUnit": "year", 
+      "field": "Quarter",
+      "title": "Year"
+    },
+    "y": {
+      "aggregate": "mean", 
+      "field": "Emissions", 
+      "type": "quantitative",
+      "title": "Mean Greenhouse Gas Emissions (Mt CO2-e)"
+    },
+    "color": {
+      "field": "Sector", 
+      "type": "nominal",
+      "title": "Sector",
+      "scale": {
+        "domain": [
+          "Agriculture", 
+          "Electricity", 
+          "Fugitive Emissions", 
+          "Industrial Processes", 
+          "Stationary Energy", 
+          "Transport", 
+          "Waste"
+        ],
+        "range": [
+          "#1D4E89", 
+          "#3B82F6", 
+          "#4F8A5B", 
+          "#7BA05B", 
+          "#D9A441", 
+          "#E76F51", 
+          "#C44536"
+        ]
+    }
+  }
+}}

@@ -1,0 +1,66 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Choropleth map of mean temperatures across Australian states.",
+  "width": 520,
+  "height": 300,
+  "padding": {"top": 15, "left": 15, "right": 10, "bottom": 10},
+  "data": {
+    "url": "au-states-topo.json",
+    "format": {
+      "type": "topojson",
+      "feature": "austates"
+    }
+  },
+  "projection": {
+    "type": "mercator"
+  },
+  "transform": [
+    {
+      "lookup": "id",
+      "from": {
+        "data": {
+          "values": [
+            {"id": 0, "state": "New South Wales", "mean_temp_anomaly": 1.49},
+            {"id": 1, "state": "Victoria", "mean_temp_anomaly": 0.94},
+            {"id": 2, "state": "Queensland", "mean_temp_anomaly": 1.21},
+            {"id": 3, "state": "South Australia", "mean_temp_anomaly": 1.50},
+            {"id": 4, "state": "Western Australia", "mean_temp_anomaly": 1.27},
+            {"id": 5, "state": "Tasmania", "mean_temp_anomaly": 0.28},
+            {"id": 6, "state": "Northern Territory", "mean_temp_anomaly": 0.90}
+          ]
+        },
+        "key": "id",
+        "fields": ["state", "mean_temp_anomaly"]
+      }
+    }
+  ],
+  "mark": {
+    "type": "geoshape",
+    "stroke": "#ffffff",
+    "strokeWidth": 1.0
+  },
+  "encoding": {
+    "color": {
+      "field": "mean_temp_anomaly",
+      "type": "quantitative",
+      "title": "Mean Temperature Anomaly (°C)",
+      "scale": {
+        "scheme": "blueorange",
+        "domain": [-1.5, 1.5],
+        "domainMid": 0
+      },
+      "legend": {
+      "tickCount": 5,
+      "gradientLength": 200,
+      "offset": -50
+      }
+    },
+    "tooltip": [
+      {"field": "state", "type": "nominal", "title": "State"},
+      {"field": "mean_temp_anomaly", "type": "quantitative", "title": "Mean Temperature Anomaly (°C)", "format": "+.2f"}
+    ]
+  },
+  "config": {
+    "view": {"stroke": null}
+  }
+}
