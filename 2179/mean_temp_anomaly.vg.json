@@ -1,0 +1,26 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "data": {"url": "Mean_temp_anomaly.csv"},
+  "width":450,
+  "layer": [
+    {
+      "mark": {"type":"bar", "size":5},
+      "encoding": {
+        "x": {"field": "Year", "type": "ordinal", "axis": {
+            "labelAngle": 45
+          }},
+        "y": {"field": "Anomaly", "type": "quantitative", "title": "Mean Temperature Anomaly (°C)"},
+        "color": {
+          "condition": {"test": "datum.Anomaly >= 0", "value": "#d62728"},
+          "value": "#1f77b4"
+        }
+      }
+    },
+    {
+      "mark": {"type": "rule", "color": "#333333", "strokeWidth": 2, "strokeDash": [6, 4]},
+      "encoding": {
+        "y": {"aggregate": "mean", "field": "Anomaly", "type": "quantitative"}
+      }
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "description": "Donut chart to show the Emissions by Sector in 2025",
+  "data": {"url": "sector_emissions.csv"},
+  "mark": {"type": "arc", "innerRadius": 50, "tooltip": true},
+  "encoding": {
+    "theta": {"field": "Emissions", "type": "quantitative", "stack": "normalize"},
+    "color": {"field": "Sector", "type": "nominal","scale": {
+        "domain": [
+          "Agriculture",
+          "Electricity",
+          "Fugitive Emissions",
+          "Industrial Processes",
+          "Stationary Energy",
+          "Transport",
+          "Waste"
+        ],
+        "range": [
+          "#006A4E",
+          "#1D4E89",
+          "#7BA05B",
+          "#1D3557",
+          "#0077B6",
+          "#54B9DD",
+          "#828282"
+        ]
+      }
+    }
+  }
+}

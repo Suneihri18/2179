@@ -1,0 +1,10 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "data": {"url": "co-emissions-per-capita.csv"},
+  "mark": {"type": "line"},
+  "encoding": {
+    "x": {"field": "Year", "type": "temporal"},
+    "y": {"field": "CO2 emissions per capita", "type": "quantitative", "aggregate": "mean",
+      "title": "Mean CO2 emissions in Australia (tonnes per person)"}
+  }
+}
