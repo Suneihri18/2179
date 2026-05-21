@@ -1,55 +1,115 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
+
 <head>
-    <title>My first HTML Document</title>
+  <title>Climate Change and Wildlife Impacts in Australia</title>
+  <!-- Import Vega & Vega-Lite (does not have to be from CDN) -->
+  <script src="https://cdn.jsdelivr.net/npm/vega@5.20.2"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.1.0"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.17.0"></script>
+
+  <!-- Import pure.css -->
+  <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.3/build/pure-min.css"
+    integrity="sha384-cg6SkqEOCV1NbJoCu11+bm0NvBRc8IYLRGXkmNrqUBfTjmMYwNKPWBTIKyw9mHNJ" crossorigin="anonymous">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Google font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+
+  <!-- CSS file -->
+  <link rel="stylesheet" type="text/css" href="css/styles.css" media="all">
+
 </head>
+
 <body>
-    <h1>Heading 1</h1>
-    <p>My First paragraph.</p>
 
-    <h2>Table of Student and Grade</h2>
-    <table border="1" cellpadding="10%">
-        <tr>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Grade</th>
-        </tr>
+  <div class="page">
 
-        <tr>
-            <td>John</td>
-            <td>Doe</td>
-            <td>HD</td>
-        </tr>
-        <tr>
-            <td>Jill</td>
-            <td>Jackson</td>
-            <td>D</td>
-        </tr>
-        <tr>
-            <td>Jane</td>
-            <td>Smith</td>
-            <td>C</td>
-        </tr>
-    </table>
-
-    <h2>Embedding Images in HTML.</h2>
-    <img src="/Users/sunei/Desktop/lotus.jpg" />
-
-    <h2>Hyperlinks in HTML</h2>
-    <a href="https://www.monash.edu/">
-        Click here to view the Monash Website.
-    </a>
-
-    <div style="color:aqua;">
-        <h2>Heading of the first group</h2>
-        <p>This is the paragraph is in the 1st group</p>
+    <div class="pure-g">
+      <div class="pure-u-1-1">
+        <h1>Climate Change and Wildlife Impacts in Australia</h1>
+        <h3>Exploring the environmental and ecological impacts of climate change</h3>
+      </div>
     </div>
 
-    <div style="color:rgb(134, 28, 179);">
-        <h2>New changes</h2>
-        <p>This is ta new change</p>
+
+    <!-- pure grid group -->
+    <div class="pure-g">
+      <div class="pure-u-1-3">
+        <div class="description description-left">
+          <h2>Emissions in Australia</h2>
+          <p>Over the years, there was a rapid increase in CO2 emission in Australia. CO2 is very prominent as it makes up 
+            approximately 74.5% of all global greenhouse gas emissions annually. This is depicted by the steep incline
+            of the line graph with its peak at around 2006. Though it is declining, it contributes heavily towards climate change.
+            The electricity (burning of fossil fuels to generate electricity) and transport sector play crucial role in the 
+            production of greenhouse gases including CO2.</p>
+        </div>
+      </div>
+      <div class="pure-u-1-3">
+        <div id="vis1" class="vis-container"></div>
+      </div>
     </div>
-    <h2>Added this header directly on GitHub</h2>
-    <p>Added this paragraph directly on GitHub</p>
+    <!-- end pure grid group -->
+
+
+    <!-- pure grid group -->
+    <div class="pure-g">
+      <div class="pure-u-2-3">
+        <div id="vis2" class="vis-container2"></div>
+      </div>
+      <div class="pure-u-1-3">
+        <div class="description description-right">
+          <h2>Mean Temperature Anomaly in Australia </h2>
+          <p>This choropleth map illustrates the Mean Temperature Anomaly (°C) across the states of Australia, 
+            showcasing the effect of global climate change. Driven primarily by the steady 
+            rise of atmospheric CO2 and other greenhouse gases, global temperatures have risen significantly, 
+            which is clearly reflected in this map as all the states have an orange shade which correlates to
+            an increased temperature anomaly.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="pure-g">
+      <div class="pure-u-1-3">
+        <div class="description description-left">
+          <h2>Mean Temperature Anomaly over the Years</h2>
+          <p>This bar graph shows Australia's Mean Temperature Anomaly (°C) from 1960 through 2025, 
+            providing a timeline of how the climate has shifted over the last several decades. In the 1960s and 1970s, 
+            blue bars (representing cooler than average years) were highly frequent. However, after the mid-1980s, 
+            orange bars (representing hotter than average years) are prominent with the temperature anomaly gradually 
+            increasing. The black line shows the average temperature anomaly and we can see that it inclines towards 
+            an increased temperature anomaly.</p>
+        </div>
+      </div>
+      <div class="pure-u-2-3">
+        <div id="vis3" class="vis-container" style="padding-left: 30px; box-sizing: border-box;"></div>
+      </div>
+    </div>
+
+  </div> <!-- end page -->
+  <script type="text/javascript">
+    var specVis1 = "./h_con_emissions.vg.json";
+    var specVis2 = "./choropleth_map.vg.json";
+    var specVis3 = "./mean_temp.vg.json";
+
+    vegaEmbed('#vis1', specVis1, { "actions": false });
+
+    vegaEmbed('#vis2', specVis2, { "actions": false }).then(function (result) {
+      // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+    }).catch(console.error);
+
+    vegaEmbed('#vis3', specVis3, { "actions": false }).then(function (result) {
+      // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+    }).catch(console.error);
+
+    vegaEmbed('#vis4', specVis2, { "actions": false }).then(function (result) {
+      // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+    }).catch(console.error);
+  </script>
+
 </body>
+
 </html>
+
